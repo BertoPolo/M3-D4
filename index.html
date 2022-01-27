@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"crossorigin="anonymous"/>
 
-    <title>Hello, world!</title>
+    <title>m3-d4</title>
   </head>
   <body>
 
@@ -17,8 +17,25 @@
 
 
 
+    <script>
+        const fetchData = function(){
 
-    
+            fetch("https://striveschool-api.herokuapp.com/books")   
+            .then(res=> res.json())
+            .then(data=>{ 
+                console.log(data)
+            })
+            .catch(err=>err)
+        }
+        //fetchData()
+
+
+
+
+    </script>
+
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
