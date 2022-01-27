@@ -62,7 +62,13 @@
 
         const addCartFunc = function(){
             buttonNode = document.getElementsByClassName("addToCard")
+            cardNode = document.getElementsByClassName("card")
             
+            for(let i = 0 ;i<buttonNode.length;i++){
+            buttonNode[i].addEventListener("click",function(){
+                cardNode[i]
+            })
+        }
         }
         // onclick on addCart - add all card to somewhere and change borderColor
 
