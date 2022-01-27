@@ -45,6 +45,16 @@
                             `
                     }
                 }
+      const addCartFunc = function(){
+            buttonNode = document.getElementsByClassName("addToCard")
+            cardNode = document.getElementsByClassName("card")
+            
+            for(let i = 0 ;i<buttonNode.length;i++){
+            buttonNode[i].addEventListener("click", function(e){
+                cardNode[i].style.background = "black"
+            })
+        }
+        }
 
         const fetchData = function(){
 
@@ -53,6 +63,7 @@
             .then(data=>{ 
                 console.log(data)
                  createCard(data)
+                 addCartFunc()
                 
             })
             .catch(err=>err)
@@ -60,16 +71,10 @@
         }
         fetchData()
 
-        const addCartFunc = function(){
-            buttonNode = document.getElementsByClassName("addToCard")
-            cardNode = document.getElementsByClassName("card")
-            
-            for(let i = 0 ;i<buttonNode.length;i++){
-            buttonNode[i].addEventListener("click",function(){
-                cardNode[i]
-            })
-        }
-        }
+      
+        
+       // why is not working this calling
+
         // onclick on addCart - add all card to somewhere and change borderColor
 
 
