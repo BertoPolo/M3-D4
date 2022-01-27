@@ -13,7 +13,12 @@
   <body>
 
     <h1>Hello, world!</h1>
-
+    <button onclick="createCard()">  click me</button>
+    <div class="container">
+        <div class="row">
+            
+        </div>
+    </div>
 
 
 
@@ -27,8 +32,21 @@
             })
             .catch(err=>err)
         }
-        //fetchData()
+        fetchData()
 
+        const createCard = data => {
+            const row = document.querySelector('.row')
+            row.innerHTML = `
+            <div class="col">
+            <div class="card" style="width: 18rem;">
+            <img src=${data[0].src} class="card-img-top" alt="...">
+            <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            </div>
+            </div>
+                `
+        }
 
 
 

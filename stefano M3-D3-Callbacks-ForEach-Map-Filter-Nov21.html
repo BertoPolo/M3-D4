@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Playground</title>
+</head>
+
+<body>
+    <h1>Strive Books</h1>
+    <div class="input-group mb-3 w-25">
+        <input type="text" class="form-control" placeholder="search book">
+        <button class="btn btn-primary" onclick="loadBooks()">Load Books</button>
+    </div>
+
+
+    <div class="container">
+        <div class="row"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        // let outerArr = []
+
+        // const readOuterArr = () => {
+        //     if (outerArr.length <= 0) {
+        //         console.log("nothing in there")
+        //     } else { outerArr.forEach((entry) => console.log(entry)) }
+        // }
+
+        // let searchQuery = ""
+
+        const renderBooks = (booksArr) => {
+            const row = document.querySelector(".row")
+
+            row.innerHTML = ""
+
+            booksArr.forEach((book, idx) => {
+                const col = document.createElement("div")
+                col.classList.add("col-3")
+
+                col.addEventListener("click", () => console.log(book))
+
+                col.innerHTML = `
+                            <div class="card">
+                            <img src=${book.img} class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${book.title}</h5>
+                                <p class="card-text">${book.category}</p>
+                                <p class="card-text">${book.price}</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            </div>
+                        `
+                row.appendChild(col)
+            })
+        }
+
+        const loadBooks = (callback, searchQuery) => {
+            fetch("https://striveschool-api.herokuapp.com/books", { method: "GET" })
+                .then(response => response.json())
+                .then(booksArr => {
+                    // DOM MANIPULATION
+
+                    // outerArr = booksArr
+                    // console.log("array filled now", outerArr)
+                    callback(booksArr, searchQuery) //renderBooks(booksArr, undefined) //filterBooks(booksArr, "cats")
+                })
+        }
+
+        const filterBooks = (booksArr, searchQuery) => {
+            const filteredBooks = booksArr.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()))
+
+            renderBooks(filteredBooks)
+        }
+
+        const handleSearchQuery = (event) => {
+            const searchQuery = event.target.value
+
+            console.log("handle search")
+
+            loadBooks(filterBooks, searchQuery)
+            // const searchQuery = event.target.value
+            // const filteredBooks = outerArr.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()))
+
+            // renderBooks(filteredBooks)
+            // console.log("filtering happend")
+        }
+
+        window.onload = () => {
+            loadBooks(renderBooks) // if you want to load automatically on load
+            //renderBooks()
+            document.querySelector("input").addEventListener("change", handleSearchQuery)
+
+            // console.log("LAST THING")
+
+        }
+    </script>
+</body>
+
+</html>
